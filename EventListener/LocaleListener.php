@@ -72,7 +72,7 @@ class LocaleListener implements EventSubscriberInterface
      * @param LocaleGuesserManager $guesserManager Locale Guesser Manager
      * @param LoggerInterface      $logger         Logger
      */
-    public function __construct($defaultLocale = 'en', LocaleGuesserManager $guesserManager, BestLocaleMatcher $bestLocaleMatcher = null, LoggerInterface $logger = null)
+    public function __construct(string $defaultLocale, LocaleGuesserManager $guesserManager, BestLocaleMatcher $bestLocaleMatcher = null, LoggerInterface $logger = null)
     {
         $this->defaultLocale = $defaultLocale;
         $this->guesserManager = $guesserManager;
@@ -106,7 +106,7 @@ class LocaleListener implements EventSubscriberInterface
         if ($locale && $this->bestLocaleMatcher) {
             $locale = $this->bestLocaleMatcher->match($locale);
         }
-        
+
         if ($locale) {
             $this->logEvent('Setting [ %s ] as locale for the (Sub-)Request', $locale);
             $request->setLocale($locale);
